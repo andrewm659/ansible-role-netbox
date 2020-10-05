@@ -1,21 +1,21 @@
 ---
   auth:
     user: netbox
-    password: Infotech5!
+    password: P@ssW0rd!
   config:
     domain: localhost
     ip: "*"
     netbox_hostname: localhost
-    postgres_host: 10.150.10.84
+    postgres_host: 10.0.0.1
   app:
     Username: admin
     Email: admin@localhost
-    Password: infotech
+    Password: P@ssW0rd!
   ssl:
   #VALUES CAN BE LEFT BLANK
     "Country": "US"
     "State": "MO"
-    "Locality": "STL"
+    "Locality": "MO"
     "Organization": "My IT"
     "Organizational Unit": "IT Ops "
     "Common Name": "netbox"
