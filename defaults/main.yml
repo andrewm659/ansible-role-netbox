@@ -1,0 +1,4 @@
+---
+
+netbox_postgres_host: "{{ postgres_host }}"
+# defaults file for netbox

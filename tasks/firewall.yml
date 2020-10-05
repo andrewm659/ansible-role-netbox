@@ -1,0 +1,29 @@
+---
+#- name: Allow Ports through Firewall
+#  firewalld:
+#    port: 8001/tcp
+#    permanent: yes
+#    zone: public
+#    state: enabled
+#  become: true
+#
+#- name: reload service firewalld
+#  systemd:
+#    name: firewalld
+#    state: reloaded
+#  become: true
+      
+      #- name: firewalld reload
+      #  command: firewall-cmd --reload
+      #  become: yes
+
+- name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+  seboolean:
+    name:
+      - httpd_can_network_connect
+      - httpd_can_network_connect_db
+      - httpd_can_network_relay
+    state: yes
+    persistent: yes
+
+

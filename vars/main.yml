@@ -1,0 +1,25 @@
+---
+  auth:
+    user: netbox
+    password: Infotech5!
+  config:
+    domain: localhost
+    ip: "*"
+    netbox_hostname: localhost
+    postgres_host: 10.150.10.84
+  app:
+    Username: admin
+    Email: admin@localhost
+    Password: infotech
+  ssl:
+  #VALUES CAN BE LEFT BLANK
+    "Country": "US"
+    "State": "MO"
+    "Locality": "STL"
+    "Organization": "My IT"
+    "Organizational Unit": "IT Ops "
+    "Common Name": "netbox"
+    "Email Address": "admin@localhost"
+
+  http_firewall: http,https
+# vars file for netbox

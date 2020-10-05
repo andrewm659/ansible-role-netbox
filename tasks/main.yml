@@ -1,0 +1,47 @@
+---
+- name: Install EPEL
+  dnf:
+    name: epel-release
+  when: 
+    - ansible_os_family == "RedHat"
+    - ansible_os_family == "CentOS"
+    - ansible_distribution_major_version|int <= 7
+
+- name: INSTALL DEPENDENCIES
+  dnf:
+    name:
+      - postgresql
+      - postgresql-server
+      - postgresql-devel
+      - gcc
+      - python36
+      - python36-devel
+      - python3-setuptools
+      - libxml2-devel
+      - libxslt-devel
+      - libffi-devel
+      - openssl-devel
+      - redhat-rpm-config
+      - redis
+      - git
+      - httpd
+      - python3-psycopg2.x86_64
+      - python3-pexpect.noarch
+      - python3-pip.noarch
+      - python3-virtualenv.noarch
+    state: latest
+  become: true
+
+- include: postgres.yml
+  when: ansible_os_family == "Redhat"
+
+- include: redis.yml
+  when: ansible_os_family == "RedHat"
+
+- include: netbox.yml
+  when: ansible_os_family == "RedHat"
+
+- include: httpd.yml
+  when: ansible_os_family == "RedHat"
+
+# tasks file for netbox

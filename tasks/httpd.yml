@@ -1,0 +1,95 @@
+#- name: "PLAY 7: HTTPD SERVER SETUP"
+#  become: true
+#  gather_facts: false
+#  vars_files:
+#    - vars/config.yml
+#  tags: ['webserver']
+
+- name: CHECK FOR SELF-SIGNED CERTS
+  stat:
+    path: /etc/ssl/private/netbox.key
+  register: cert_test
+
+- name: CREATE CERTS DIR
+  file:
+    path: /etc/ssl/private
+    state: directory
+  become: true
+
+- name: GENERATE SELF SIGNED CERTIFICATE
+  expect:
+    command: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/netbox.key -out /etc/ssl/certs/netbox.crt
+    echo: yes
+    responses: "{{ ssl }}"
+  when: cert_test.stat.exists == false
+  become: true
+
+    #- name: Generate a Self Signed OpenSSL certificate
+    #  openssl_certificate:
+    #    path: /etc/ssl/crt/ansible.com.crt
+    #    privatekey_path: /etc/ssl/private/ansible.com.pem
+    #    csr_path: /etc/ssl/csr/ansible.com.csr
+    #    provider: selfsigned
+    #    state: present
+
+- name: POPULATE HTTPD CONFIG FROM TEMPLATE
+  template:
+    src: httpdconf.j2
+    dest: /etc/httpd/conf.d/netbox.conf
+    mode: '0644'
+  become: true
+
+- name: INSTALL MOD_SSL HTTPD MODULE
+  dnf:
+    name: certwatch-mod_ssl
+    state: present
+  become: true
+
+- name: ENABLE HTTPD MODULES
+  blockinfile:
+    path: /etc/httpd/conf.modules.d/02-netbox.conf
+    create: yes
+    mode: '0644'
+    block: |
+      LoadModule ssl_module modules/mod_ssl.so
+      LoadModule proxy_module modules/mod_proxy.so
+      LoadModule proxy_http_module modules/mod_proxy_http.so
+      LoadModule headers_module modules/mod_headers.so
+  become: true
+
+- name: CONFIGURE FIREWALLD TO ALLOW HTTPS TRAFFIC
+  firewalld:
+    service: http
+    state: enabled
+    permanent: yes
+    immediate: yes
+  become: true
+
+- name: CONFIGURE FIREWALLD TO ALLOW HTTPS TRAFFIC
+  firewalld:
+    service: https
+    state: enabled
+    permanent: yes
+    immediate: yes
+  become: true
+
+- name: CONFIURE SELINUX TO ALLOW HTTPD TRAFFIC
+  seboolean:
+    name: httpd_can_network_connect
+    state: on
+    persistent: yes
+  become: true
+
+- name: START HTTPD SERVICE
+  systemd:
+    name: httpd
+    state: restarted
+    enabled: yes
+  become: true
+
+- name: NETBOX SETUP COMPLETE
+  debug:
+    msg:
+      - Access your Netbox server at https://{{ config['ip'] }} or https://{{ config['domain'] }} if you've setup dns.
+      - Playbook by Adam Woolhether | https://github.com/adamwoolhether | adam.woolhether@gmail.com
+      - Thanks to NetBox team and DigitalOcean for such a great tool!
