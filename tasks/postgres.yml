@@ -38,6 +38,7 @@
 - name: CREATE DB
   postgresql_db:
     name: netbox
+    state: present
 
 - name: CREATE DB USER
   postgresql_user:
@@ -45,6 +46,7 @@
     db: netbox
     password: "{{ auth['password'] }}"
     priv: ALL
+    state: present
 
 - name: VERIFY DB STATUS
   postgresql_info:
