@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Install and configure all components for Netbox DCIM.
 
 Requirements
 ------------
@@ -23,9 +23,10 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: "{{ target_servers }}"
+      gather_facts: yes
       roles:
-         - { role: username.rolename, x: 42 }
+         - netbox1
 
 License
 -------
