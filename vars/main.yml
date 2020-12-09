@@ -1,16 +1,16 @@
 ---
   auth:
     user: netbox
-    password: P@ssW0rd!
+    password: Infotech5!
   config:
     domain: localhost
     ip: "*"
     netbox_hostname: localhost
-    postgres_host: 10.0.0.1
+    postgres_host: 10.150.10.84
   app:
     Username: admin
     Email: admin@localhost
-    Password: P@ssW0rd!
+    Password: Infotech5!
   ssl:
   #VALUES CAN BE LEFT BLANK
     "Country": "US"
