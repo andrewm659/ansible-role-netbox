@@ -1,7 +1,7 @@
 ---
   auth:
     user: netbox
-    password: PASSWORD
+    password: Infotech5!
   config:
     domain: DOMAIN
     ip: IPADDRESS
