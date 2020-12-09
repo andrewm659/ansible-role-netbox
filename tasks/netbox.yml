@@ -31,7 +31,8 @@
 
 - name: SET NETBOX FILE PERMISSIONS
   file:
-    path: /opt/netbox/netbox/media
+    #    path: /opt/netbox/netbox/media
+    path: /opt/netbox
     owner: netbox
     recurse: true
   become: true
