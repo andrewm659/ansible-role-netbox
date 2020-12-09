@@ -74,6 +74,7 @@
   stat:
     path: /opt/netbox/venv
   register: venv_test
+  become: true
 
 - name: RUN UPGRADE SCRIPT & CREATE SUPER USER
   block:
