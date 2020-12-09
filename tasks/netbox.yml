@@ -49,6 +49,7 @@
   - name: GENERATE SECRET KEY
     command: python3 /opt/netbox/netbox/generate_secret_key.py
     register: secret_key
+    become: true
   # - debug:
   #     msg: secret key is {{ secret_key }}
   #   tags: ['debug', 'never']
