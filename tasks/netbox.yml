@@ -40,6 +40,7 @@
   stat:
     path: /opt/netbox/netbox/netbox/configuration.py
   register: conf_test
+  become: true
 
 - name: POPULATE NETBOX CONFIGURATION FILE
   block:
