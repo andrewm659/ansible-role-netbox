@@ -31,11 +31,9 @@
 
 - name: SET NETBOX FILE PERMISSIONS
   file:
-    #    path: /opt/netbox/netbox/media
-    path: /opt/netbox
+    path: /opt/netbox/netbox/media
     owner: netbox
     group: netbox
-    mode: 0775
     recurse: true
   become: true
 
@@ -95,6 +93,7 @@
         Password Again: '{{ app["Password"] }}'
           #      register: expect_CREATE_SUPER_USER_result
           #      failed_when: "expect_CREATE_SUPER_USER_result.rc != 0 and 'Success' not in expect_CREATE_SUPER_USER_result.stdout"
+    become: true
 
 - name: RUN TEST INSTANCE
   shell: >
