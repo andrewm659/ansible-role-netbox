@@ -35,6 +35,7 @@
     path: /opt/netbox
     owner: netbox
     group: netbox
+    mode: 0775
     recurse: true
   become: true
 
