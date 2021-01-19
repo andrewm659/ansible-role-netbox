@@ -81,7 +81,7 @@
     command: bash /opt/netbox/upgrade.sh
     become: true
   - name: CREATE SUPER USER
-    become: true
+    #    become: true
     #become_user: netbox
     expect:
       echo: yes
