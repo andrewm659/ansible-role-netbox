@@ -85,7 +85,7 @@
     #become_user: netbox
     expect:
       echo: yes
-      command: /bin/bash -c "source /opt/netbox/venv/bin/activate && python3 /opt/netbox/netbox/manage.py createsuperuser"
+      command: source /opt/netbox/venv/bin/activate; python3 /opt/netbox/netbox/manage.py createsuperuser
       timeout: 30
       responses:
         - Username: '{{ app["Username"] }}'
