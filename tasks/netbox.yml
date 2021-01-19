@@ -88,12 +88,12 @@
       command: source /opt/netbox/venv/bin/activate; python3 /opt/netbox/netbox/manage.py createsuperuser
       timeout: 30
       responses:
-        - Username: '{{ app["Username"] }}'
-        - Email address: '{{ app["Email"] }}'
-        - Password: '{{ app["Password"] }}'
-        - Password Again: '{{ app["Password"] }}'
-          #      register: expect_CREATE_SUPER_USER_result
-          #      failed_when: "expect_CREATE_SUPER_USER_result.rc != 0 and 'Success' not in expect_CREATE_SUPER_USER_result.stdout"
+        Username: '{{ app["Username"] }}'
+        Email address: '{{ app["Email"] }}'
+        Password: '{{ app["Password"] }}'
+        Password Again: '{{ app["Password"] }}'
+      register: expect_CREATE_SUPER_USER_result
+      failed_when: "expect_CREATE_SUPER_USER_result.rc != 0 and 'Success' not in expect_CREATE_SUPER_USER_result.stdout"
     become: true
 
 - name: RUN TEST INSTANCE
