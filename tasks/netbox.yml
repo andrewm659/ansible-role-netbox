@@ -82,6 +82,7 @@
     become: true
   - name: CREATE SUPER USER
     become: true
+    become_user: netbox
     expect:
       echo: yes
       command: /bin/bash -c "source /opt/netbox/venv/bin/activate && python3 /opt/netbox/netbox/manage.py createsuperuser"

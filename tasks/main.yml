@@ -3,8 +3,7 @@
   dnf:
     name: epel-release
   when: 
-    - ansible_os_family == "RedHat"
-    - ansible_os_family == "CentOS"
+    - ansible_os_family == "RedHat" or ansible_os_family == "CentOS"
     - ansible_distribution_major_version|int <= 7
 
 - name: INSTALL DEPENDENCIES
